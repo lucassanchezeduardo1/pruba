@@ -17,6 +17,10 @@ async function bootstrap() {
   // 3. No olvides el CORS para que Ionic se conecte
   app.enableCors();
 
-  await app.listen(3000);
+   // 4. PUERTO PARA RAILWAY (¡lo más importante!)
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+
+  console.log('Servidor corriendo en el puerto: ' + port);
 }
 bootstrap();
