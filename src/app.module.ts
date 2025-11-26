@@ -18,19 +18,17 @@ import { PreciosModule } from './precios/precios.module';
   imports: [
     TypeOrmModule.forRoot({
   type: 'mysql',
-  host: process.env.DB_HOST || 'mysql.railway.internal',
+  host: process.env.DB_HOST || 'viaduct.proxy.rlwy.net',
   port: parseInt(process.env.DB_PORT || '3306', 10),
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'railway',
   autoLoadEntities: true,
   synchronize: false,
-  // Configuración para compatibilidad:
   connectorPackage: 'mysql2',
   extra: {
-    ssl: false,
-    authPlugins: {
-      mysql_clear_password: () => () => Buffer.from(process.env.DB_PASSWORD + '\0')
+    ssl: {
+      rejectUnauthorized: false  // 👈 IMPORTANTE para Railway
     }
   }
 }),
