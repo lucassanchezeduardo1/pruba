@@ -18,8 +18,8 @@ import { PreciosModule } from './precios/precios.module';
   imports: [
     TypeOrmModule.forRoot({
   type: 'mysql',
-  host: process.env.DB_HOST || 'viaduct.proxy.rlwy.net',
-  port: parseInt(process.env.DB_PORT || '3306', 10),
+  host: process.env.DB_HOST || 'nozomi.proxy.rlwy.net',
+  port: parseInt(process.env.DB_PORT || '41611', 10),
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'railway',
@@ -28,7 +28,7 @@ import { PreciosModule } from './precios/precios.module';
   connectorPackage: 'mysql2',
   extra: {
     ssl: {
-      rejectUnauthorized: false  // 👈 IMPORTANTE para Railway
+      rejectUnauthorized: false
     }
   }
 }),
