@@ -13,20 +13,24 @@ import { PedidosModule } from './pedidos/pedidos.module';
 import { ClientesModule } from './clientes/clientes.module';
 import { PreciosModule } from './precios/precios.module';
 
-import * as dotenv from 'dotenv';
-dotenv.config(); // 👈 Cargar variables del .env
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,        
-      port: parseInt(process.env.DB_PORT ?? '3306', 10),
-      username: process.env.DB_USER,    
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,    
+      host: process.env.DB_HOST || 'localhost',        
+      port: parseInt(process.env.DB_PORT || '3306', 10), 
+      username: process.env.DB_USER || 'root',    
+      password: process.env.DB_PASSWORD || '',
+      database: process.env.DB_NAME || 'gugar_db',    
       autoLoadEntities: true,
-      synchronize: false,               // EN PRODUCCIÓN SIEMPRE EN FALSE
+      synchronize: false,
+      // Agrega esto para Railway:
+      extra: {
+        ssl: process.env.NODE_ENV === 'production' ? { 
+          rejectUnauthorized: false 
+        } : false,
+      }
     }),
 
     UsuariosModule,
