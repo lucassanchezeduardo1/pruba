@@ -24,7 +24,7 @@ import { PreciosModule } from './precios/precios.module';
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'railway',
   autoLoadEntities: true,
-  synchronize: false,
+  synchronize: true,
   connectorPackage: 'mysql2',
   // 👇 CONFIGURACIÓN PARA RAILWAY:
   connectTimeout: 60000,
