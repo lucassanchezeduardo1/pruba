@@ -25,15 +25,15 @@ import { PreciosModule } from './precios/precios.module';
   database: process.env.DB_NAME || 'railway',
   autoLoadEntities: true,
   synchronize: false,
-  // Configuración para Railway:
-  connectTimeout: 60000, // 👈 Aumenta timeout
-  acquireTimeout: 60000,
+  // Configuración para compatibilidad:
+  connectorPackage: 'mysql2',
   extra: {
-    connectionLimit: 5,
-    ssl: false // 👈 Deshabilita SSL temporalmente
+    ssl: false,
+    authPlugins: {
+      mysql_clear_password: () => () => Buffer.from(process.env.DB_PASSWORD + '\0')
+    }
   }
 }),
-
     UsuariosModule,
     NotificacionesModule,
     RutasModule,
